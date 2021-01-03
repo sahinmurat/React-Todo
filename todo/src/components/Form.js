@@ -1,14 +1,28 @@
 import React from 'react';
+import {  BsFillPlusSquareFill } from "react-icons/bs";
 
-const Form = () => {
+const Form = ({setInputText, setTodos, todos, inputText}) => {
+
+    const inputTextHandler = (e) => {
+        setInputText(e.target.value);
+    }
+    const submitTodoHandler = (e) => {
+      e.preventDefault();
+      console.log(e.preventDefault);
+      setTodos([
+          ...todos, {text:inputText, completed:false, id:Math.random() * 1000}
+      ])
+      setInputText('')
+    }
+
     return(
         <form>
-            <input type='text' class='todo-input' />
-            <button class='todo-button' type='submit'>
-                <i class= 'fas fa-plus-square'></i>
+            <input onChange={inputTextHandler} type='text' classNameName='todo-input' />
+            <button className='todo-button' onClick={submitTodoHandler} type='submit'>
+            <BsFillPlusSquareFill size='1em' color='orange' />
             </button>
-            <div class='select'>
-                <select name='todos' class='filter-todo'>
+            <div className='select'>
+                <select name='todos' className='filter-todo'>
                     <option value='all'>All</option>
                     <option value='completed'>completed</option>
                     <option value='uncompleted'>Uncompleted</option>
