@@ -19,6 +19,14 @@ const addTodo = (todo) =>{
         const removeArr = [...todos].filter(todo => todo.id !== id)
         setTodos(removeArr);
     }
+
+    const updateTodo = (todoId, newValue)=>{
+        if(!newValue.text || /^\s*$/.test(newValue.text)){
+            return;}
+
+        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))    
+    }
+
     const completeTodo = id =>{
         let updatedTodos = todos.map(todo =>{
             if (todo.id === id) {
@@ -37,7 +45,8 @@ const addTodo = (todo) =>{
             <Todo
             todos={todos}
             completeTodo={completeTodo}
-            removeTodo={removeTodo} />
+            removeTodo={removeTodo}
+            updateTodo={updateTodo} />
         </div>
     )
 }
