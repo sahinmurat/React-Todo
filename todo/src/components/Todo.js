@@ -40,5 +40,4 @@ if (edit.id){
       </div>
     ))
 }
-
 export default Todo
